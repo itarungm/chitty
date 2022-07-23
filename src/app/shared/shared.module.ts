@@ -10,12 +10,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
 @NgModule({
   declarations: [
-    AddEditChitComponent
+    AddEditChitComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule
   ],
   exports:[
-    AddEditChitComponent
+    AddEditChitComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }
