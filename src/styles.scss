@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+* {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  box-sizing: border-box;
+  font-size: 16px;
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: linear-gradient(to bottom right, #BBDEFB,#18FFFF);
+    height: 100vh;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.outline-none{
+    outline: none;
+}

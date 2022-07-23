@@ -1,0 +1,30 @@
+<div class="frame">
+    <header class="d-flex justify-content-between align-items-center">
+        <h1>Chitty - List your chits</h1>
+        <h4>{{todayDate | date:'EEEE, d MMM'}}</h4>
+    </header>
+    <form>
+        <ng-container *ngIf="chitList.length>0;else notFound">
+            <ul class="list">
+                <li [style.background-color]="chit.randomColor" *ngFor="let chit of chitList"
+                    class="d-flex flex-column mb-2" (click)="openDialog(chit)">
+                    <div *ngIf="chit.dueDate">
+                        <span class="dt">{{chit.dueDate | date:'d MMM y'}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="note w-75">
+                            {{chit.note}}
+                        </span>
+                        <span *ngIf="chit.attachment">
+                            <mat-icon class="attachment">attachment</mat-icon>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </ng-container>
+        <ng-template #notFound>
+            <span class="d-flex justify-content-center p-3">No Chits Found!</span>
+        </ng-template>
+    </form>
+    <button mat-stroked-button color="accent" class="w-100" (click)="openDialog()">ADD CHIT</button>
+</div>

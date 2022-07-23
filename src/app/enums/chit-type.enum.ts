@@ -1,0 +1,5 @@
+export enum ChitType{
+    "NOTE_ONLY"="NOTE_ONLY",
+    "NOTE_DATE"="NOTE_DATE",
+    "NOTE_DATE_ATTATCHMENT"="NOTE_DATE_ATTATCHMENT"
+}

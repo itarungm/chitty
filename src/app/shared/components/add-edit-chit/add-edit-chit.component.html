@@ -1,0 +1,62 @@
+<section>
+    <div class="d-flex justify-content-between">
+        <h2>{{isEditMode?'Edit':'Add'}} Chit</h2>
+        <span *ngIf="isEditMode" (click)="onDelete()"><mat-icon  class="cursor-pointer">delete</mat-icon></span>
+    </div>
+    <hr>
+    <form action="" [formGroup]="chitForm">
+        <div class="d-flex flex-column">
+            <mat-label class="font-weight-bold mb-1">Type</mat-label>
+            <mat-radio-group formControlName="type" aria-label="Type" aria-labelledby="Type" class="ml-3"
+                (change)="onTypeChange($event)">
+                <mat-radio-button [value]="ChitTypes.NOTE_ONLY" class="mr-4">Note Only</mat-radio-button>
+                <mat-radio-button [value]="ChitTypes.NOTE_DATE" class="mr-4">Note + Date</mat-radio-button>
+                <mat-radio-button [value]="ChitTypes.NOTE_DATE_ATTATCHMENT" class="mr-4">Note + Date + Attatchment
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="mt-2">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Your note goes here</mat-label>
+                <textarea formControlName="note" matInput placeholder="Ex. Interview at 1pm"></textarea>
+                <small class="text-danger"
+                    *ngIf="chitFormDetails['note'].errors && chitFormDetails['note'].hasError('required') &&  chitFormDetails['note'].touched">Please
+                    type some notes</small>
+
+            </mat-form-field>
+        </div>
+        <div class="mt-2 row">
+            <div class="col-6"
+                *ngIf="chitFormDetails['type'].value === ChitTypes.NOTE_DATE || chitFormDetails['type'].value === ChitTypes.NOTE_DATE_ATTATCHMENT">
+                <mat-form-field appearance="fill" class="outline-none due-date">
+                    <mat-label>Select due date</mat-label>
+                    <input formControlName="dueDate" matInput [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <small class="text-danger"
+                        *ngIf="chitFormDetails['dueDate'].errors && chitFormDetails['dueDate'].hasError('required') &&  chitFormDetails['dueDate'].touched">Please
+                        select date</small>
+                </mat-form-field>
+            </div>
+
+            <div class="col-6 text-right" *ngIf="chitFormDetails['type'].value === ChitTypes.NOTE_DATE_ATTATCHMENT">
+                <button mat-raised-button (click)="file.click()" type="button">
+                    <mat-icon>attachment</mat-icon>Attatch File
+                </button>
+                <input type="file" class="d-none" (change)="onFileChange($event)" #file formControlName="attachment" />
+                <br>
+                <small class="text-danger"
+                    *ngIf="chitFormDetails['attachment'].errors && chitFormDetails['attachment'].hasError('required') &&  chitFormDetails['attachment'].touched">Please
+                    select file</small>
+
+            </div>
+        </div>
+        <div class="actions d-flex justify-content-end" mat-dialog-actions>
+            <button mat-raised-button (click)="dialogRef.close()">Cancel</button>
+            <button mat-raised-button color="primary" type="submit"
+                (click)="onSubmit()">{{isEditMode?'Update':'Save'}}</button>
+        </div>
+
+    </form>
+</section>
